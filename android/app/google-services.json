@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "527755598895",
+    "project_id": "always-stay-fresh",
+    "storage_bucket": "always-stay-fresh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527755598895:android:96073549d2eecf19a8bada",
+        "android_client_info": {
+          "package_name": "com.recuvame.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527755598895-bkn0fq2sloa7mem9s83sk0m1q28o1elg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdOEFKWiY6T4h9gX6zPzDjNMndF9tDEVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527755598895-bkn0fq2sloa7mem9s83sk0m1q28o1elg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527755598895-jl4kbc02d78pqu7veioqkmk9r0ljqlql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.recuvame.driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527755598895:android:8c351e6b43bd97a5a8bada",
+        "android_client_info": {
+          "package_name": "com.recuvame.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527755598895-bkn0fq2sloa7mem9s83sk0m1q28o1elg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdOEFKWiY6T4h9gX6zPzDjNMndF9tDEVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527755598895-bkn0fq2sloa7mem9s83sk0m1q28o1elg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527755598895-jl4kbc02d78pqu7veioqkmk9r0ljqlql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.recuvame.driver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
