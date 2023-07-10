@@ -120,6 +120,7 @@ class Languages extends Translations {
         "balance": "Balance : ",
         "lost_my_item": "Lost my item",
         "past_trip_details": "Past Trip Details",
+        "where_do_you_need_the_mechanic": "Where do you need the Mechanic?",
         "pay_via": "Pay via",
         "comments": "Comments",
         "no_comments": "No Comments",
@@ -289,6 +290,7 @@ class Languages extends Translations {
         "Dont_have": "अब तक कोई खाता नहीं है?",
         "language": "हिन्दी",
         "forgot_password": " पासवर्ड भूल गए ",
+        "where_do_you_need_the_mechanic": "आपको मैकेनिक की आवश्यकता कहां है?",
         "otp": " ओटीपी ",
         "verification_code": "पुष्टि संख्या",
         "new_password": " नया पासवर्ड ",
@@ -546,6 +548,7 @@ class Languages extends Translations {
       "nl_NL": {
         "language": "Dutch",
         "forgot_password": "Wachtwoord vergeten",
+        "where_do_you_need_the_mechanic": "Waar heb je de monteur nodig?",
         "trip_details": "Servicegegevens",
         "otp": "OTP",
         "new_password": "nieuw paswoord",

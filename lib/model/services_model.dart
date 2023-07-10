@@ -26,6 +26,7 @@ class ServicesModel {
     this.waitingFreeMins,
     this.waitingMinCharge,
     this.status,
+    this.moduleType,
   });
 
   int? id;
@@ -44,6 +45,7 @@ class ServicesModel {
   int? waitingFreeMins;
   int? waitingMinCharge;
   int? status;
+  String? moduleType;
 
   factory ServicesModel.fromJson(Map<String, dynamic> json) => ServicesModel(
     id: json["id"],
@@ -62,6 +64,7 @@ class ServicesModel {
     waitingFreeMins: json["waiting_free_mins"],
     waitingMinCharge: json["waiting_min_charge"],
     status: json["status"],
+    moduleType: json["module_type"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -81,5 +84,6 @@ class ServicesModel {
     "waiting_free_mins": waitingFreeMins,
     "waiting_min_charge": waitingMinCharge,
     "status": status,
+    "module_type": moduleType,
   };
 }

@@ -205,8 +205,8 @@ class _RatingDialogState extends State<RatingDialog> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      Text(
-                        'rate_driver'.tr,
+                      Text(cont.isRideSelected.value == true?
+                        'rate_driver'.tr : 'Rate Serviceman',
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.w500),
                       ),
@@ -393,6 +393,7 @@ class _RatingDialogState extends State<RatingDialog> {
                                 SizedBox(
                                   width: 5,
                                 ),
+                                cont.isRideSelected.value == false? SizedBox() :
                                 cont
                                     .checkRequestResponseModel
                                     .value
@@ -422,16 +423,16 @@ class _RatingDialogState extends State<RatingDialog> {
                       //   color: Colors.grey[600],
                       // ),
                       // SizedBox(height: 15.h),
-                      Text(
-                        "how_is_your_driver?".tr,
+                      Text(cont.isRideSelected.value == true?
+                        "how_is_your_driver?".tr : 'How is your serviceman?',
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w500,
                           fontSize: 16.sp,
                         ),
                       ),
-                      Text(
-                        "please_rate_your_driver".tr,
+                      Text(cont.isRideSelected.value == true?
+                        "please_rate_your_driver".tr : 'Please rate your serviceman',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12.sp,

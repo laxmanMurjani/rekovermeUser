@@ -72,6 +72,7 @@ class ApiUrl {
   static String editSaveContactList = "$apiBaseUrl/edit/contact";
   static String deleteSaveContactList = "$apiBaseUrl/delete/contact";
   static String giveFeedback = "$apiBaseUrl/ticketcreate";
+  static String getModules = "$apiBaseUrl/home/cms";
 
   static String payStackUrl(
           {required String email,

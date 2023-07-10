@@ -143,11 +143,14 @@ class HomeController extends BaseController {
   RxString bookSomeName = "".obs;
   RxInt timeLeftToRespond = 0.obs;
   Timer? _timer;
+  RxList availableModules = [].obs;
+  RxBool isRideSelected = true.obs;
   // GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: AppString.googleMapKey);
 
   @override
   void onInit() {
     super.onInit();
+    getModules();
 
     checkRequestResponseModel.listen((p0) async {
       try {
@@ -431,6 +434,18 @@ class HomeController extends BaseController {
                 servicesModelFromJson(jsonEncode(data["response"]));
             serviceModelList.clear();
             serviceModelList.addAll(serviceList);
+            var roadSideServiceList = serviceList.where((o) => o.moduleType == "ROADSIDESERVICE").toList();
+            var towServiceList = serviceList.where((o) => o.moduleType == "Tow").toList();
+
+            serviceModelList.clear();
+
+            if(isRideSelected.value){
+              serviceModelList.addAll(towServiceList);
+              print("texiserviceList$towServiceList");
+
+            }else{
+              serviceModelList.addAll(roadSideServiceList);
+            }
           },
           onError: (ErrorType errorType, String? msg) {
             showError(msg: msg);
@@ -893,6 +908,14 @@ class HomeController extends BaseController {
           "final_destination":
               "${multipleLocationAdModelList.isEmpty && !isRoundTrip.value ? "1" : "0"}"
         });
+      }else{
+        multiDestinationList.add({
+          "d_address": locationFromTo.text,
+          "d_latitude": "${latLngFrom?.latitude}",
+          "d_longitude": "${latLngFrom?.longitude}",
+          "final_destination":
+               "${multipleLocationAdModelList.isEmpty && !isRoundTrip.value ? "1" : "0"}"
+        });
       }
       for (int i = 0; i < multipleLocationAdModelList.length; i++) {
         MultipleLocationAddModel multipleLocationAddModel =
@@ -929,6 +952,8 @@ class HomeController extends BaseController {
         onSuccess: (Map<String, dynamic> data) {
           dismissLoader();
           isWalletSelected.value = false;
+          print('wwfParam: ${params}');
+          print('wwf: ${data["response"]}');
           fareResponseModel.value =
               fareResponseModelFromJson(jsonEncode(data["response"]));
           fareResponseModel.refresh();
@@ -984,6 +1009,14 @@ class HomeController extends BaseController {
           "d_longitude": "${latLngWhereTo1?.longitude}",
           "final_destination":
               "${multipleLocationAdModelList.isEmpty && !isRoundTrip.value ? "1" : "0"}"
+        });
+      }else{
+        multiDestinationList.add({
+          "d_address": locationFromTo.text,
+          "d_latitude": "${latLngFrom?.latitude}",
+          "d_longitude": "${latLngFrom?.longitude}",
+          "final_destination": "0"
+          //"${multipleLocationAdModelList.isEmpty && !isRoundTrip.value ? "1" : "0"}"
         });
       }
       for (int i = 0; i < multipleLocationAdModelList.length; i++) {
@@ -1947,6 +1980,31 @@ class HomeController extends BaseController {
           });
     } catch (e) {
       log("message   ==>  ${e}");
+      showError(msg: e.toString());
+    }
+  }
+
+  Future<void> getModules() async {
+    try {
+      // showLoader();
+      await apiService.getRequest(
+          url: ApiUrl.getModules,
+          onSuccess: (Map<String, dynamic> data) {
+            // dismissLoader();
+            //print('///${data['response']['homeScreenBox']}');
+            availableModules.value = data['response']['homeScreenBox'];
+            print('///${availableModules}');
+            // serviceTypeSelectedIndex.value = 0;
+            // List<ServicesModel> serviceList =
+            // servicesModelFromJson(jsonEncode(data["response"]));
+            // serviceModelList.clear();
+            // serviceModelList.addAll(serviceList);
+          },
+          onError: (ErrorType errorType, String? msg) {
+            showError(msg: msg);
+          });
+    } catch (e) {
+      print(e);
       showError(msg: e.toString());
     }
   }

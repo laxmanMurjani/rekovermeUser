@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 
 import 'package:arbyuser/ui/drawer_srceen/help_screen.dart';
 import 'package:arbyuser/ui/widget/launching_soon.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:expand_widget/expand_widget.dart';
@@ -190,6 +191,7 @@ class _HomeScreenState extends State<HomeScreen>
       //     "chil00d.key===>${_homeController.checkRequestResponseModel.value.data[0].id}");
 
       // if(_homeController.)
+
     });
 
     _requestTimer = Timer.periodic(Duration(seconds: 3), (_) async {
@@ -1411,7 +1413,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10),
-                                        child: Text(
+                                        child: Text(cont.availableModules.isEmpty? 'Where would you like to get your \ncar picked up from?' :
                                           'How can we assist you?',
                                           style: TextStyle(
                                               color: AppColors.primary,
@@ -1860,91 +1862,125 @@ class _HomeScreenState extends State<HomeScreen>
                                         ],
                                       ),
                                       SizedBox(height: 3.h),
+                                      cont.availableModules.isNotEmpty?
                                       Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            GestureDetector(onTap: (){
-                                                    Get.to(() => LocationScreen());
-                                                    isSubmit = false;
-                                                    _shouldScaleDown = false;
-                                            },child: assistWidget(AppImage.assist11,'Towing')),
-                                            GestureDetector(onTap: (){
-                                              Get.to(()=> LaunchingSoon());
-                                            },child: assistWidget(AppImage.assist22,'Road Side Service')),
-                                          ],),
+                                        child: SizedBox(height:MediaQuery.of(context).size.height*0.155,
+                                          child: ListView.builder(
+                                              itemCount: cont.availableModules.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (BuildContext context, int index) {
+                                                return cont.availableModules[index]['status'] == 1?
+                                                    GestureDetector(onTap: (){
+                                                      index==0? {
+                                                                    cont.isRideSelected.value = true,
+                                                                    Get.to(() => LocationScreen()),
+                                                                    isSubmit = false,
+                                                                    _shouldScaleDown = false
+                                                      } : {
+                                                        cont.isRideSelected.value = false,
+                                                        Get.to(() => LocationScreen()),
+                                                        isSubmit = false,
+                                                        _shouldScaleDown = false
+                                                        //Get.to(()=> LaunchingSoon())
+                                                      };
+                                                    },
+                                                      child: assistWidget('${ApiUrl.baseImageUrl}/storage/${cont.availableModules[index]['image']}',
+                                                          cont.availableModules[index]['url']),
+                                                    ) : SizedBox();
+                                              }),
+                                        ),
+                                      //),
+                                        // Row(mainAxisAlignment: MainAxisAlignment.center,
+                                        //   children: [
+                                        //     isModelAvailable('Towing')==1?
+                                        //     GestureDetector(onTap: (){
+                                        //             Get.to(() => LocationScreen());
+                                        //             isSubmit = false;
+                                        //             _shouldScaleDown = false;
+                                        //     },child: assistWidget(AppImage.assist11,'Towing')) : SizedBox(),
+                                        //
+                                        //     isModelAvailable('Road Side Service')==1? SizedBox(width:
+                                        //       MediaQuery.of(context).size.width*0.07,) : SizedBox(),
+                                        //
+                                        //     isModelAvailable('Road Side Service')==1?
+                                        //     GestureDetector(onTap: (){
+                                        //       Get.to(()=> LaunchingSoon());
+                                        //     },child: assistWidget(AppImage.assist22,'Road Side Service')) : SizedBox(),
+                                        //   ],),
+                                      ) :
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 5),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            cont.isRideSelected.value = true;
+                                            Get.to(() => LocationScreen());
+                                            isSubmit = false;
+                                            _shouldScaleDown = false;
+                                          },
+                                          child: Container(
+                                            height: 50.h,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 5.w,
+                                                vertical: 10.h),
+                                            alignment: Alignment.center,
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              // boxShadow: [
+                                              //   BoxShadow(
+                                              //     color: AppColors.primaryColor
+                                              //         .withOpacity(0.06),
+                                              //     offset: Offset(0, 12.h),
+                                              //     blurRadius: 10.r,
+                                              //   )
+                                              // ],
+                                            ),
+                                            child: TextField(
+                                              controller: cont.locationWhereTo1,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                color: AppColors.primaryColor,
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              textAlignVertical:
+                                                  TextAlignVertical.center,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                contentPadding: EdgeInsets.zero,
+                                                hintText:
+                                                    'Enter Destination',
+                                                prefixIcon: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Image.asset(
+                                                    AppImage.search,
+                                                    width: 27,
+                                                    height: 27,
+                                                    fit: BoxFit.contain,
+                                                    color:
+                                                        Colors.black,
+                                                  ),
+                                                ),
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey.shade400,
+                                                    fontSize: 15.sp),
+                                                border: InputBorder.none,
+                                              ),
+                                              minLines: 1,
+                                              maxLines: 2,
+                                              readOnly: true,
+                                              enabled: false,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                      // Padding(
-                                      //   padding: EdgeInsets.only(right: 5),
-                                      //   child: GestureDetector(
-                                      //     onTap: () {
-                                      //       Get.to(() => LocationScreen());
-                                      //       isSubmit = false;
-                                      //       _shouldScaleDown = false;
-                                      //     },
-                                      //     child: Container(
-                                      //       height: 50.h,
-                                      //       padding: EdgeInsets.symmetric(
-                                      //           horizontal: 5.w,
-                                      //           vertical: 10.h),
-                                      //       alignment: Alignment.center,
-                                      //       width: double.infinity,
-                                      //       decoration: BoxDecoration(
-                                      //         color: Colors.grey[200],
-                                      //         borderRadius:
-                                      //             BorderRadius.circular(10.r),
-                                      //         // boxShadow: [
-                                      //         //   BoxShadow(
-                                      //         //     color: AppColors.primaryColor
-                                      //         //         .withOpacity(0.06),
-                                      //         //     offset: Offset(0, 12.h),
-                                      //         //     blurRadius: 10.r,
-                                      //         //   )
-                                      //         // ],
-                                      //       ),
-                                      //       child: TextField(
-                                      //         controller: cont.locationWhereTo1,
-                                      //         textAlign: TextAlign.start,
-                                      //         style: TextStyle(
-                                      //           color: AppColors.primaryColor,
-                                      //           fontSize: 13.sp,
-                                      //           fontWeight: FontWeight.w400,
-                                      //         ),
-                                      //         textAlignVertical:
-                                      //             TextAlignVertical.center,
-                                      //         decoration: InputDecoration(
-                                      //           isDense: true,
-                                      //           contentPadding: EdgeInsets.zero,
-                                      //           hintText:
-                                      //               'Enter Destination',
-                                      //           prefixIcon: Padding(
-                                      //             padding:
-                                      //                 const EdgeInsets.all(5.0),
-                                      //             child: Image.asset(
-                                      //               AppImage.search,
-                                      //               width: 27,
-                                      //               height: 27,
-                                      //               fit: BoxFit.contain,
-                                      //               color:
-                                      //                   Colors.black,
-                                      //             ),
-                                      //           ),
-                                      //           hintStyle: TextStyle(
-                                      //               color: Colors.grey.shade400,
-                                      //               fontSize: 15.sp),
-                                      //           border: InputBorder.none,
-                                      //         ),
-                                      //         minLines: 1,
-                                      //         maxLines: 2,
-                                      //         readOnly: true,
-                                      //         enabled: false,
-                                      //       ),
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                      // SizedBox(
-                                      //   height: 5,
-                                      // )
+                                      SizedBox(
+                                        height: 5,
+                                      )
                                     ],
                                   ),
                                   //SizedBox(height: 8),
@@ -2552,11 +2588,21 @@ class _HomeScreenState extends State<HomeScreen>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          cont.isRideSelected.value?
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 25.0),
                                             child: Text(
                                               'trip_details'.tr,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ) : Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 25.0),
+                                            child: Text(
+                                              'Where do you need the Mechanic?'.tr,
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w500),
@@ -2665,6 +2711,7 @@ class _HomeScreenState extends State<HomeScreen>
 
                                           //   ],
                                           // )
+                                          cont.isRideSelected.value?
                                           Row(
                                             children: [
                                               Expanded(
@@ -2724,7 +2771,40 @@ class _HomeScreenState extends State<HomeScreen>
                                                 ],
                                               ),
                                             ],
-                                          )
+                                          ) : 
+                                              Row(children: [
+                                                Image.asset(AppImage.rekoLocation,height:25,width:25 ),
+                                                SizedBox(width: 8,),
+                                                Expanded(
+                                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
+                                                    SizedBox(height: 2,),
+                                                    Text('Current Location',style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.w500,
+                                                        color: AppColors.primaryColor)),
+                                                    SizedBox(height: 2,),
+                                                    Text(cont.locationFromTo.text,
+                                                        overflow: TextOverflow.ellipsis,style: TextStyle(
+                                                          fontSize: 12.sp,
+                                                        )),
+                                                    SizedBox(height: 5,),
+                                                  ],),
+                                                ),
+                                                GestureDetector(onTap: (){
+                                                  Get.to(() =>
+                                                      LocationScreen());
+                                                  isSubmit = false;
+                                                  _shouldScaleDown = false;
+                                                },
+                                                  child: Text('Change',style: TextStyle(
+                                                      color: AppColors
+                                                          .primaryColor,
+                                                      fontSize: 15,
+                                                      fontWeight: ui
+                                                          .FontWeight
+                                                          .w500)),
+                                                )
+                                              ],)
                                         ],
                                       ),
                                     ),
@@ -2736,7 +2816,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     Padding(
                                       padding: EdgeInsets.only(left: 50.w),
                                       child: Text(
-                                        "select_car".tr,
+                                        cont.isRideSelected.value? "select_car".tr : 'Select Service',
                                         style: TextStyle(
                                             fontSize: 22,
                                             color: AppColors.primaryColor,
@@ -2945,6 +3025,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           SizedBox(
                                             height: 10,
                                           ),
+                                          cont.isRideSelected.value?
                                           Row(
                                             children: [
                                               Expanded(
@@ -3001,7 +3082,39 @@ class _HomeScreenState extends State<HomeScreen>
                                                 ],
                                               ),
                                             ],
-                                          ),
+                                          ) : Row(children: [
+                                            Image.asset(AppImage.rekoLocation,height:25,width:25 ),
+                                            SizedBox(width: 8,),
+                                            Expanded(
+                                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
+                                                SizedBox(height: 2,),
+                                                Text('Current Location',style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColors.primaryColor)),
+                                                SizedBox(height: 2,),
+                                                Text(cont.locationFromTo.text,
+                                                    overflow: TextOverflow.ellipsis,style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                    )),
+                                                SizedBox(height: 5,),
+                                              ],),
+                                            ),
+                                            // GestureDetector(onTap: (){
+                                            //   Get.to(() =>
+                                            //       LocationScreen());
+                                            //   isSubmit = false;
+                                            //   _shouldScaleDown = false;
+                                            // },
+                                            //   child: Text('Change',style: TextStyle(
+                                            //       color: AppColors
+                                            //           .primaryColor,
+                                            //       fontSize: 15,
+                                            //       fontWeight: ui
+                                            //           .FontWeight
+                                            //           .w500)),
+                                            // )
+                                          ],),
 
                                           // Row(
                                           //   children: [
@@ -3167,6 +3280,15 @@ class _HomeScreenState extends State<HomeScreen>
                                           //       .value
                                           //       .service!.image!}");
                                           // }, child: Text("dsdsdd")),
+                                          cont.isRideSelected == false?
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 8,right: 8,top: 20,bottom: 20),
+                                            child: Container(height: 22,width: 22,decoration:
+                                            BoxDecoration(color: AppColors.primaryColor,
+                                                shape: BoxShape.circle, border: Border.all(
+                                                    width: 3, color: AppColors.primaryColor
+                                                )),),
+                                          ) :
                                           cont.fareResponseModel.value.service
                                                       ?.image ==
                                                   null
@@ -3201,6 +3323,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
+                                              cont.isRideSelected == false? SizedBox() :
                                               Text(
                                                 "${cont.fareResponseModel.value.distance ?? ""}"
                                                         .tr +
@@ -3603,7 +3726,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   int.parse(_homeController
                                                       .checkRequestResponseModel
                                                       .value
-                                                      .provider_select_timeout);
+                                                      .provider_select_timeout?? '30');
                                               // cont.startTimer();
 
                                             }
@@ -3612,7 +3735,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                     .checkRequestResponseModel
                                                     .value
                                                     .provider_select_timeout ??
-                                                60);
+                                                '60');
                                           },
                                           child: Container(
                                             width: 170,
@@ -4302,7 +4425,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    'driver_is_arriving...'.tr,
+                                                    cont.isRideSelected.value == true?
+                                                    'driver_is_arriving...'.tr : 'Serviceman is arriving',
                                                     style: TextStyle(
                                                         fontSize: 18.sp,
                                                         color: AppColors
@@ -4376,7 +4500,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Text('driver_has_arrived.'.tr,
+                                                  Text(cont.isRideSelected.value == true?
+                                                      'driver_has_arrived.'.tr : 'Serviceman has arrived',
                                                       style: TextStyle(
                                                           fontSize: 18.sp,
                                                           fontWeight:
@@ -4626,8 +4751,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                   SizedBox(
                                                     width: 5,
                                                   ),
-                                                  cont
-                                                              .checkRequestResponseModel
+                                                  cont.isRideSelected.value == false? SizedBox() :
+                                                  cont.checkRequestResponseModel
                                                               .value
                                                               .data[0]
                                                               .serviceType!
@@ -5421,6 +5546,15 @@ class _HomeScreenState extends State<HomeScreen>
                 Row(
                   children: [
                     SizedBox(width: 7,),
+                    cont.isRideSelected == false?
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8,right: 8,top: 20,bottom: 20),
+                          child: Container(height: 22,width: 22,decoration:
+                          BoxDecoration(color: !isSelected ? Colors.white : AppColors.primaryColor,
+                              shape: BoxShape.circle, border: Border.all(
+                            width: 3, color: AppColors.primaryColor
+                          )),),
+                        ) :
                     serviceModel.image == null
                         ? Image.asset(AppImage.profilePic,
                             height: 80, width: 80, fit: BoxFit.contain)
@@ -5445,6 +5579,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         SizedBox(height: 2),
                         // if (isSelected)
+                        cont.isRideSelected == false? SizedBox() :
                         Text(
                           "${fareResponseModel.distance ?? ""} miles".tr,
                           style: TextStyle(
@@ -6113,35 +6248,51 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget assistWidget(image, title){
-    return Container(height: MediaQuery.of(context).size.height*0.155,
-      width: MediaQuery.of(context).size.height*0.155,
-      decoration: BoxDecoration(color: Colors.white,
-          borderRadius: BorderRadius.circular(15),boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 3),
-              color: Colors.black26,
-              blurRadius: 3,
-            ) //
-          ]),child: Column(
-        children: [
-          ClipRRect(borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),topRight: Radius.circular(15)
-          ),
-            child: Container(
-              height: MediaQuery.of(context).size.height*0.11,child: Align(alignment: Alignment.bottomRight,
-                child: Image.asset(image,fit: BoxFit.cover,width: title=='Towing'? double.infinity : null,)),),
-          ),
-          ClipRRect(borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)
-          ),
-            child: Container(height: MediaQuery.of(context).size.height*0.045,
-              width: double.infinity,
-              color: Color(0xFF002744),child:
-              Align(alignment: Alignment.center,child:
-              Text(title,style: TextStyle(color: Color(0xFFB3EEE8),
-                  fontSize: 14, fontWeight: FontWeight.w400),),),),
-          )
-        ],
-      ),);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.025),
+      child: Container(height: MediaQuery.of(context).size.height*0.155,
+        width: MediaQuery.of(context).size.height*0.155,
+        decoration: BoxDecoration(color: Colors.white,
+            borderRadius: BorderRadius.circular(15),boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 3),
+                color: Colors.black26,
+                blurRadius: 3,
+              ) //
+            ]),child: Column(
+          children: [
+            ClipRRect(borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),topRight: Radius.circular(15)
+            ),
+              child: Container(
+                height: MediaQuery.of(context).size.height*0.11,
+                child: CachedNetworkImage(imageUrl: image,fit: BoxFit.contain,
+                    height: MediaQuery.of(context).size.height*0.11),),
+            ),
+            ClipRRect(borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)
+            ),
+              child: Container(height: MediaQuery.of(context).size.height*0.045,
+                width: double.infinity,
+                color: Color(0xFF002744),child:
+                Align(alignment: Alignment.center,child:
+                Text(title,style: TextStyle(color: Color(0xFFB3EEE8),
+                    fontSize: 14, fontWeight: FontWeight.w400),),),),
+            )
+          ],
+        ),),
+    );
   }
+
+  int isModelAvailable(model){
+    int ret = 0;
+    for(var map in _homeController.availableModules){
+      if(map['url']==model){
+        if(map['status']==1){
+          ret = 1;
+        }
+      }
+    }
+    return ret;
+    }
 }

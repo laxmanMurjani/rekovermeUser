@@ -78,8 +78,9 @@ class _FindingDriverDialogState extends State<FindingDriverDialog> {
                 //   style:
                 //   TextStyle(fontSize: 20, fontWeight: FontWeight.w500,color: AppColors.primary),),
                 SizedBox(height: 10.h),
-                Text(
-                  "You deserve the best, Connecting you with the best driver",
+                Text(_homeController.isRideSelected.value == true?
+                  "You deserve the best, Connecting you with the best driver" :
+                  'You deserve the best, Connecting you with the best serviceman',
                   style:
                   TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold,color: AppColors.primaryColor),
                   textAlign: TextAlign.center,

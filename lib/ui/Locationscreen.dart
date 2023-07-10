@@ -120,7 +120,9 @@ class _LocationScreenState extends State<LocationScreen>
             .add(multipleLocationAddModel);
       }
       Future.delayed(Duration(milliseconds: 500), () {
-        _homeController.locationWhereToFocusNode.requestFocus();
+        _homeController.isRideSelected.value?
+        _homeController.locationWhereToFocusNode.requestFocus() :
+        _homeController.locationFromFocusNode.requestFocus();
       });
     }
 
@@ -146,8 +148,8 @@ class _LocationScreenState extends State<LocationScreen>
             return NoInternetWidget();
           }
           return GetX<UserController>(builder: (userCont) {
-            bool isInitLatLng = (cont.tempLatLngFrom != null &&
-                cont.tempLatLngWhereTo1 != null);
+            bool isInitLatLng = cont.isRideSelected.value? (cont.tempLatLngFrom != null &&
+                cont.tempLatLngWhereTo1 != null) : cont.tempLatLngFrom != null;
             if (widget.isSelectOtherAddress!) {
               if (widget.isSelectOtherAddress != null ||
                   widget.isRideLocationUpdate) {
@@ -434,6 +436,7 @@ class _LocationScreenState extends State<LocationScreen>
                             SizedBox(
                               height: 3.h,
                             ),
+                            cont.isRideSelected.value == true?
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
@@ -529,7 +532,7 @@ class _LocationScreenState extends State<LocationScreen>
                                     )
                                 ],
                               ),
-                            ),
+                            ) : SizedBox(),
                           ],
                           // Row(
                           //   children: [

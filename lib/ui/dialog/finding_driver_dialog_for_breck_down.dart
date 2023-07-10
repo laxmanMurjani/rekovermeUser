@@ -57,7 +57,9 @@ class FindingDriverForBreakDownDialogState extends State<FindingDriverForBreakDo
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                 ) :   Text(
-                  "You_deserve_the_best_Connecting_you_with_the_best_driver".tr,
+              _homeController.isRideSelected.value == true?
+                  "You_deserve_the_best_Connecting_you_with_the_best_driver".tr :
+                  "You deserve the best, Connecting you with the best serviceman",
                   style:
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
