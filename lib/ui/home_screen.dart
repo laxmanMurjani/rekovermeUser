@@ -1878,6 +1878,11 @@ class _HomeScreenState extends State<HomeScreen>
                                                                     isSubmit = false,
                                                                     _shouldScaleDown = false
                                                       } : {
+                                                        // cont.tempLocationWhereTo1.clear(),
+                                                        // cont.locationWhereTo1.clear(),
+                                                        cont.latLngWhereTo1 = null,
+                                                        cont.latLngWhereTo2 = LatLng(0, 0),
+                                                        cont.latLngWhereTo3 = LatLng(0, 0),
                                                         cont.isRideSelected.value = false,
                                                         Get.to(() => LocationScreen()),
                                                         isSubmit = false,
@@ -5621,13 +5626,14 @@ class _HomeScreenState extends State<HomeScreen>
                     // ),
                   ],
                 ),
+                isSelected?
                 Text(
                   " ${_userController.userData.value.currency ?? ""} ${fareResponseModel.estimatedFare ?? ""}",
                   style: TextStyle(
                       fontSize: 18,
                       color: Color(0xFF393A3C),
                       fontWeight: FontWeight.w500),
-                ),
+                ) : SizedBox(),
               ],
             ),
           )
