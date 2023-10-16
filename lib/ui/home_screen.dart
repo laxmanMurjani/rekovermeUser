@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen>
       // _homeController.getServices();
       await _homeController.checkRequest();
       await _userController.getLocation();
-      await _userController.getArbyBanner();
+      // await _userController.getArbyBanner();
       _userController.getPromoCodeList();
       // print(
       //     "chil00d.key===>${_homeController.checkRequestResponseModel.value.data[0].id}");
