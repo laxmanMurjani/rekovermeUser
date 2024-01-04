@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Mozlit User</string>
+	<string>Rekoverme</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>arbyuser</string>
+	<string>Rekoverme</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.923493235275-dh0aqe70uv9cmarmv11s32mqo5lth1vp</string>
+				<string>com.googleusercontent.apps.527755598895-vpm0ir8fpain7u0mael27elu8sja1j92</string>
 				<string>fb687446652446565</string>
 			</array>
 		</dict>
@@ -41,7 +41,9 @@
 	<key>FacebookClientToken</key>
 	<string>31b2168b0050cb19765ab9fb1c78b4eb</string>
 	<key>FacebookDisplayName</key>
-	<string>Mozlit User</string>
+	<string>Rekoverme</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>NO</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -71,19 +73,21 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app needs access to location.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs access to location.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app does not require access to the microphone.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
-	<key>UIBackgroundModes</key>
+    <key>NSCameraUsageDescription</key>
+    <string>to enable you to upload your picture on your profile to make it easier for driver and user to identify while starting a ride</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs access to location to find nearest service executives for on demand towing and vehicle recovery service.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location to find nearest service executives for on demand towing and vehicle recovery service.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location to find nearest service executives for on demand towing and vehicle recovery service.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>to enable you to upload your picture on your profile to make it easier for driver and user to identify while starting a ride</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This identifier will be used to deliver personalized ads to you.</string>
+    <key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>location</string>

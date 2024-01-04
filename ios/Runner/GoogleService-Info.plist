@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>923493235275-dh0aqe70uv9cmarmv11s32mqo5lth1vp.apps.googleusercontent.com</string>
+	<string>527755598895-vpm0ir8fpain7u0mael27elu8sja1j92.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.923493235275-dh0aqe70uv9cmarmv11s32mqo5lth1vp</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>923493235275-nd4ng2rjkkk95lvcsbvl9vu0934m83to.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.527755598895-vpm0ir8fpain7u0mael27elu8sja1j92</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD5WnTQrj7HtroOZvrx75-eM4cDFyvWCkU</string>
+	<string>AIzaSyA37oej0xL1VgT8cVM5eC57dVVOPXeVUhk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>923493235275</string>
+	<string>527755598895</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mozilit.user</string>
+	<string>com.recuvame.user</string>
 	<key>PROJECT_ID</key>
-	<string>predictive-host-314811</string>
+	<string>always-stay-fresh</string>
 	<key>STORAGE_BUCKET</key>
-	<string>predictive-host-314811.appspot.com</string>
+	<string>always-stay-fresh.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:923493235275:ios:a379c3937b37ed987f2bce</string>
+	<string>1:527755598895:ios:d89e20b9acf6e7f5a8bada</string>
 	<key>DATABASE_URL</key>
-	<string>https://predictive-host-314811-default-rtdb.firebaseio.com</string>
+	<string>https://always-stay-fresh-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

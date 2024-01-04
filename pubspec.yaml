@@ -48,10 +48,14 @@ dependencies:
   google_place: ^0.4.7
   google_directions_api: ^0.9.1
 
-  country_code_picker: ^2.0.2
+  country_code_picker: ^3.0.0
   flutter_share: ^2.0.0
   dotted_line: ^3.1.0
-  modal_bottom_sheet: ^2.0.1
+  modal_bottom_sheet:
+    git:
+      url: https://github.com/followthemoney1/modal_bottom_sheet.git
+      ref: main
+      path: modal_bottom_sheet
   carousel_slider: ^4.1.1
   shared_preferences: ^2.0.15
   sqflite: ^2.2.0+3

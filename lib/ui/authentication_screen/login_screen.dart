@@ -12,7 +12,6 @@ import 'package:arbyuser/ui/widget/custom_text_filed.dart';
 import 'package:arbyuser/ui/widget/no_internet_widget.dart';
 import 'package:arbyuser/util/app_constant.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
