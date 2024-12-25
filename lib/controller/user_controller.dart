@@ -534,6 +534,7 @@ class UserController extends BaseController {
                 arguments: [phoneNumberController.text, countryCode.value]);
           },
           onError: (ErrorType errorType, String msg) {
+            dismissLoader();
             print('object12 ${msg}');
             // showError(msg: msg);
             Get.snackbar("Alert", msg,

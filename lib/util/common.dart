@@ -372,12 +372,12 @@ Future<PermissionStatus> _getContactPermission() async {
 
 Future<void> _handleInvalidPermissions(
     PermissionStatus permissionStatus) async {
-  if (permissionStatus == PermissionStatus.denied) {
-    Get.snackbar("Message", "Access to contact data denied",
-        backgroundColor: Colors.redAccent);
-  } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
-    await openAppSettings();
-    Get.snackbar("Message", "Contact data not available on device'",
-        backgroundColor: Colors.redAccent);
-  }
+  // if (permissionStatus == PermissionStatus.denied) {
+  //   Get.snackbar("Message", "Access to contact data denied",
+  //       backgroundColor: Colors.redAccent);
+  // } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
+  //   await openAppSettings();
+  //   Get.snackbar("Message", "Contact data not available on device'",
+  //       backgroundColor: Colors.redAccent);
+  // }
 }

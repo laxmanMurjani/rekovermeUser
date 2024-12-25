@@ -1136,6 +1136,7 @@ class HomeController extends BaseController {
       await apiService.getRequest(
         url: ApiUrl.requestCheck,
         onSuccess: (Map<String, dynamic> data) {
+          log('checkRequestResponse: ${data["response"]}');
           try {
             checkRequestResponseModel.value =
                 checkRequestResponseModelFromJson(jsonEncode(data["response"]));
